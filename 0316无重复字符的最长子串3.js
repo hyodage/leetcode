@@ -11,3 +11,27 @@ sliding window
 如此反复直到set里没有s[i]为止
 重复3和4直到遍历玩整个字符串然后返回maxlength
 */
+/**
+ * @param {string} s
+ * @return {number}
+ */
+ var lengthOfLongestSubstring = function(s) {
+    let i=0,j=0,maxlength=0
+    if(s.length===0){
+        return 0
+    }
+    let set = new Set()
+    for(i;i<s.length;i++){
+        if(!set.has(s[i])){
+            set.add(s[i])
+            maxlength = Math.max(set.size,maxlength)
+        }else{
+            while(set.has(s[i])){
+                set.delete(s[j])
+                j++
+            }
+            set.add(s[i])
+        }
+    }
+    return maxlength
+};
